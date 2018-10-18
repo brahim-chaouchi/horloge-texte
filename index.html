@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Horloge</title>
+		<style>
+			body{font-size:7em;}
+		</style>
+	</head>
+	<body>
+		<!--
+		<span id="heure"></span>
+		<span id="texte"></span>
+		-->
+		<span id="ilest">il est</span>
+		<span id="h0">minuit</span>
+		<span id="h1">une</span>
+		<span id="h2">deux</span>
+		<span id="h3">trois</span>
+		<span id="h4">quatre</span>
+		<span id="h5">cinq</span>
+		<span id="h6">six</span>
+		<span id="h7">sept</span>
+		<span id="h8">huit</span>
+		<span id="h9">neuf</span>
+		<span id="h10">dix</span>
+		<span id="h11">onze</span>
+		<span id="h12">midi</span>
+		<span id="hs">heure</span><span id="hp">s</span>
+		<span id="moins">moins</span>
+		<span id="m20">vingt</span>
+		<span id="m30">trente</span>
+		<span id="m40">quarente</span>
+		<span id="m50">cinquante</span>
+		<span id="le">le</span>
+		<span id="et">et</span>
+		<span id="m1m">un</span><span id="m1f">e</span>
+		<span id="m2">deux</span>
+		<span id="m3">trois</span>
+		<span id="m4">quatre</span>
+		<span id="m5">cinq</span>
+		<span id="m6">six</span>
+		<span id="m10">dix</span>
+		<span id="m7">sept</span>
+		<span id="m8">huit</span>
+		<span id="m9">neuf</span>
+		<span id="m11">onze</span>
+		<span id="m12">douze</span>
+		<span id="m13">treize</span>
+		<span id="m14">quatorze</span>
+		<span id="m16">seize</span>
+		<span id="m15p">quart</span>
+		<span id="m30p">demi</span>
+		<script>
+			function maj(){
+				//let currentdate = new Date("July 21, 1983 12:00:00");
+				let currentdate = new Date();
+				let heure=currentdate.getHours();
+				let minute=currentdate.getMinutes();
+				let signe='+';
+				let element;
+				if(minute>30 && minute%5==0){
+					heure=(heure+1)%24;
+					signe='-';
+					minute=60-minute;
+				}
+				/*
+				element=document.getElementById('heure');
+				element.innerHTML=""+currentdate.getHours()+":"+currentdate.getMinutes();
+				element=document.getElementById('texte');
+				element.innerHTML=""+heure+""+signe+""+minute;
+				*/
+				element=document.getElementById('ilest');
+				element.style="color:#000;";
+				for(i=0;i<13;i++){
+					element=document.getElementById('h'+i);
+					if(heure==i || (i!=0 && heure==i+12)){
+						element.style="color:#000;";
+					}else{
+						element.style="color:#eee;";
+					}
+					element=document.getElementById('hs');
+					if(heure!=0 && heure!=12){
+						element.style="color:#000;";
+					}else{
+						element.style="color:#eee;";
+					}
+					element=document.getElementById('hp');
+					if(heure!=0 && heure!=12 && heure>1 && heure!=13){
+						element.style="color:#000;";
+					}else{
+						element.style="color:#eee;";
+					}
+				}
+				element=document.getElementById('moins');
+				if(signe=='-'){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m20');
+				if(minute>=20 && minute<=29){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m30');
+				if(minute>=30 && minute<=39){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m40');
+				if(minute>=40 && minute<=49 && minute!=45){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m50');
+				if(minute>=50 && minute<=59){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('le');
+				if(minute==15 && signe=='-'){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('et');
+				if((signe=='+' && minute==15) || minute==21 || minute==30 || minute==31 || minute==41 || minute==51){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m1m');
+				if(minute==1 || minute==21 || minute==31 || minute==41 || minute==51){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m1f');
+				if(minute==1){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m2');
+				if(minute==2 || minute==22 || minute==32 || minute==42 || minute==52){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m3');
+				if(minute==3 || minute==23 || minute==33 || minute==43 || minute==53){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m4');
+				if(minute==4 || minute==24 || minute==34 || minute==44 || minute==54){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m5');
+				if(minute==5 || minute==25 || minute==35 || minute==55){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m6');
+				if(minute==6 || minute==26 || minute==36 || minute==46 || minute==56){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m10');
+				if(minute==10 || minute==17 || minute==18 || minute==19){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m7');
+				if(minute==7 || minute==17 || minute==27 || minute==37 || minute==47 || minute==57){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m8');
+				if(minute==8 || minute==18 || minute==28 || minute==38 || minute==48 || minute==58){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m9');
+				if(minute==9 || minute==19 || minute==29 || minute==39 || minute==49 || minute==59){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m11');
+				if(minute==11){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m12');
+				if(minute==12){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m13');
+				if(minute==13){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m14');
+				if(minute==14){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m16');
+				if(minute==16){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m15p');
+				if(minute==15){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+				element=document.getElementById('m30p');
+				if(minute==30){
+					element.style="color:#000;";
+				}else{
+					element.style="color:#eee;";
+				}
+			}
+			maj();
+			setInterval(function(){maj();}, 1000);
+		</script>
+	</body>
+</html>
